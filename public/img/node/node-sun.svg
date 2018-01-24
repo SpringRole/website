@@ -45,5 +45,5 @@
       <feBlend result="blend-2" in="SourceGraphic"/>
     </filter>
   </defs>
-  <circle class="cls-1" cx="92.016" cy="92.016" r="76.984"/>
+  <circle class="cls-1" cx="92.016" cy="92.016" r="50"/>
 </svg>
