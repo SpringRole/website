@@ -73,7 +73,7 @@ Route::get('/profile/{username}', [
     'uses' => 'UserController@viewProfileAction'
 ])->name('profile');
 
-Route::match(['get', 'post'],'/profile/edit/{id}', [
+Route::match(['get', 'post'],'/profile/edit/{username}', [
     'as'=>'pages.edit_profile',
     'uses' => 'UserController@profileEdit'
 ]);

@@ -33,7 +33,7 @@
 
             if (Session::get('user')['username'] == $params['profileUser']->getUsername()):
             ?>
-            <a href="/profile/edit/{{Session::get('user')['uuid']}}" title="<?= _("Edit your profile"); ?>"><b><?= _("Edit your profile"); ?></b></a>
+            <a href="/profile/edit/{{Session::get('user')['username']}}" title="<?= _("Edit your profile"); ?>"><b><?= _("Edit your profile"); ?></b></a>
             <?php
             endif;
             ?>
