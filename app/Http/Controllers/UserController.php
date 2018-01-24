@@ -1,5 +1,5 @@
 <?php
-    
+
     namespace App\Http\Controllers;
 
     use App\Model\JsonResponse;
@@ -123,7 +123,7 @@
                     //hydrate user obj
                     $securityHelper = new SH();
                     $user = new User();
-                    
+
                     $user->setNewUuid();
                     $user->setUsername( $username );
                     $user->setEmail( $email );
@@ -135,7 +135,7 @@
                     $user->setActive( true );
 
                     $hashedPassword = $securityHelper->hashPassword( $password, $user->getSalt() );
-                    
+
                     $user->setPassword( $hashedPassword );
 //                    $user->setIpAtRegistration( $_SERVER['REMOTE_ADDR'] );
                     $user->setIpAtRegistration($request->ip());
@@ -204,7 +204,7 @@
                     if($user){
 
                         $error = false;
-                        
+
                         //send a message
                         $mailer = new Mailer();
                         $mailerResult = $mailer->sendPasswordRecovery($user);
@@ -231,13 +231,13 @@
          * Validates the token and email, then redirect to profile page with a modal new password form
          */
         public function forgotPassword2Action($email, $token){
-            
+
             $userManager = new UserManager();
             $user = $userManager->findByEmail($email);
             if ($user){
                 if ($user->getToken() === $token){
                     $user->setEmailValidated(true);
-                    //change the token 
+                    //change the token
                     $user->setToken( SH::randomString() );
                     $userManager->update($user);
                     $this->logUser($user);
@@ -291,7 +291,7 @@
                         $view->send(true);
                     }
                 }
-                
+
                 $params['errors'] = $validator->getErrors();
             }
 
@@ -311,14 +311,14 @@
             if ($user){
                 if ($user->getToken() === $token){
                     $user->setEmailValidated(true);
-                    //change the token 
+                    //change the token
                     $user->setToken( SH::randomString() );
                     $userManager->update($user);
                 }
             }
             Router::redirect( Router::url("graph") );
         }
-    
+
 
         /**
          * Show the profile, but with the password modal opened
@@ -336,7 +336,7 @@
 
             $profileUser = $userManager->findByUsername($username);
             if (!$profileUser){
-                Router::fourofour(_("This user never was born, or vanished."));
+                return redirect()->route('fourofour');
             }
 
             $skillManager = new SkillManager();
@@ -350,9 +350,6 @@
             $usernameEncoded = SH::encode($username);
             $params['title'] = sprintf(_("%s's Profile"), $usernameEncoded);
             return \view('pages.profile',['params'=> $params]);
-//            $view = new View("view_profile.php", $params);
-//
-//            $view->send();
         }
 
         /**
@@ -362,12 +359,11 @@
 
             $userManager = new UserManager();
             $securityHelper = new SH();
-
             $profileUser = $userManager->findByUsername($username);
             $loggedUser = $securityHelper->getUser($request);
-    
+
             if (!$profileUser){
-                route('fourofour','This user does not exist');
+                return redirect()->route('fourofour');
             }
             elseif (!$loggedUser){
                 SH::forbid();
@@ -379,14 +375,11 @@
             $skillManager = new SkillManager();
             $latestActivity = $skillManager->getLatestActivity($profileUser);
 
-            $uploadErrors = false;  
+            $uploadErrors = false;
             $errors = false;
             //profile form submitted
             if (!empty($_POST) && $loggedUser){
-
-                $newUsername = $_POST['username'];
-                $newEmail = $_POST['email'];
-                $bio = $_POST['bio'];
+                $bio = $_POST['job'];
                 $interests = $_POST['interests'];
                 $languages = $_POST['languages'];
                 $country = $_POST['country'];
@@ -394,24 +387,24 @@
                 //validation
                 $validator = new CustomValidator();
 
-                $validator->validateUsername($newUsername);
-                //changing username ?
-                if ($newUsername != $loggedUser->getUsername()){
-                    $validator->validateUniqueUsername($newUsername);
-                }
-                $validator->validateEmail($newEmail);
+//                $validator->validateUsername($newUsername);
+//                //changing username ?
+//                if ($newUsername != $loggedUser->getUsername()){
+//                    $validator->validateUniqueUsername($newUsername);
+//                }
+//                $validator->validateEmail($newEmail);
                  //changing email ?
-                if ($newEmail != $loggedUser->getEmail()){
-                    $validator->validateUniqueEmail($newEmail);
-                }
+//                if ($newEmail != $loggedUser->getEmail()){
+//                    $validator->validateUniqueEmail($newEmail);
+//                }
 
                 if ($validator->isValid()){
 
                     //hydrate user obj
                     $user = $securityHelper->getUser($request);
 
-                    $user->setUsername( $newUsername );
-                    $user->setEmail( $newEmail );
+//                    $user->setUsername( $newUsername );
+//                    $user->setEmail( $newEmail );
                     $user->setInterests( $interests );
                     $user->setLanguages( $languages );
                     $user->setCountry( $country );
@@ -459,8 +452,7 @@
 
                     $userManager->update($user);
                     $securityHelper->putUserDataInSession($request, $user);
-                    return view('profile',['username'=> $user->getUsername()]);
-//                    Router::redirect( Router::url('viewProfile', array('username' => $user->getUsername())) );
+                    return redirect()->route('profile',['username'=> $user->getUsername()]);
                 }
                 else {
                     $errors = $validator->getErrors();
@@ -481,7 +473,7 @@
             //csrf token for delete account link
 //            $params['csrfToken'] = SH::setNewCsrfToken();
 
-            return view('pages.profile', ['params'=> $params]);
+            return view('pages.profile_edit', ['params'=> $params]);
 //            $view = new View("profile.php", $params);
 //
 //            $view->send();
@@ -592,16 +584,16 @@
 
             // 4. Generate the jsConnect string.
 
-            // This should be true unless you are testing. 
+            // This should be true unless you are testing.
             // You can also use a hash name like md5, sha1 etc which must be the name as the connection settings in Vanilla.
-            $secure = true; 
+            $secure = true;
             WriteJsConnect($user, $_GET, $clientID, $secret, $secure);
 
-        } 
+        }
 
 
         public function deleteAccountAction($csrfToken,Request $request){
-            
+
             $userManager = new UserManager();
             $securityHelper = new SH();
 
