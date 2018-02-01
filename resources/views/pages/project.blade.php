@@ -203,7 +203,19 @@
         <div class="container">
             <h2><?= _("MEET THE TEAM"); ?></h2>
             <h3><?= _("SUPPORTERS"); ?></h3>
-            <p style="text-align:center;"><img src="../img/SR_logo.png" alt="Logo"></p>
+            <p style="text-align: justify; text-justify: inter-word;"><a href="http://www.springrole.com" target="_blank" title="<?= _("SpringRole"); ?>">SpringRole</a> is the first portfolio company from Science Blockchain, the blockchain-focused incubator from Science Inc. It is the first professional reputation network powered by artificial intelligence and blockchain to eliminate fraud from user profiles.</p>
+            <p style="text-align:center;"><a href="http://www.springrole.com" target="_blank"><img src="../img/SR_Rect.png" alt="logo"></a></p>
+            <h3><?= _("MAINTAINERS"); ?></h3>
+            <div class="maintainer-col">
+                <div id="anshaj-pic" class="maintainer-pic"></div>
+                <h4>ANSHAJ GOEL</h4>
+                <p>Anshaj is a Software Developer working at SpringRole Inc. He has worked on Natural Language Processing extensively and likes to solve day to day trivial problems with code. His interests lie in the fields of Data Science and Machine Learning.</p>
+            </div>
+            <div class="maintainer-col">
+                <div id="mayank-pic" class="maintainer-pic"></div>
+                <h4>MAYANK SEHGAL</h4>
+                <p>Mayank is a final year Computer Science student at MIT Manipal. His interests range from Data Science to Visual Media, and he is contributing to the Skill Project as part of his internship at SpringRole Inc. He also runs a YouTube channel where he captures his ideas and travels, and is an active musician as well.</p>
+            </div>
             <h3><?= _("FOUNDERS"); ?></h3>
             <p>Skill Project is brought to you by 3 friends living in Paris, France. We share a passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Apart from that, we come from very different cultural and gastronomical backgrounds! Come and chat with us in the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community section</a>.</p>
             <div class="project-col">
