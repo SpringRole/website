@@ -137,7 +137,6 @@
                     $hashedPassword = $securityHelper->hashPassword( $password, $user->getSalt() );
 
                     $user->setPassword( $hashedPassword );
-//                    $user->setIpAtRegistration( $_SERVER['REMOTE_ADDR'] );
                     $user->setIpAtRegistration($request->ip());
                     $user->setDateCreated( time() );
                     $user->setDateModified( time() );

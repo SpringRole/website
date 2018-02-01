@@ -218,7 +218,6 @@
                     else {
                         $json = new JsonResponse("error", _("Error posting message."));
                     }
-                    
                 }
                 else {
                     $json = new JsonResponse("error", _("An error occured."));
