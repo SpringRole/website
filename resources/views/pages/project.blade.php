@@ -203,8 +203,8 @@
         <div class="container">
             <h2><?= _("MEET THE TEAM"); ?></h2>
             <h3><?= _("SUPPORTERS"); ?></h3>
-            <p style="text-align: justify; text-justify: inter-word;"><a href="http://www.springrole.com" target="_blank" title="<?= _("SpringRole"); ?>">SpringRole</a> is the first portfolio company from Science Blockchain, the blockchain-focused incubator from Science Inc. It is the first professional reputation network powered by artificial intelligence and blockchain to eliminate fraud from user profiles.</p>
-            <p style="text-align:center;"><a href="http://www.springrole.com" target="_blank"><img src="../img/SR_Rect.png" alt="logo"></a></p>
+            <p style="text-align:center;"><a href="http://www.springrole.com" target="_blank"><img src="../img/sr_logo_b.png" alt="logo"></a></p>
+            <p style="text-align: center; text-justify: inter-word;"><a href="http://www.springrole.com" target="_blank" title="<?= _("SpringRole"); ?>">SpringRole</a> is the first portfolio company from Science Blockchain, the blockchain-focused incubator from Science Inc. It is the first professional reputation network powered by artificial intelligence and blockchain to eliminate fraud from user profiles.</p>
             <h3><?= _("MAINTAINERS"); ?></h3>
             <div class="maintainer-col">
                 <div id="anshaj-pic" class="maintainer-pic"></div>
