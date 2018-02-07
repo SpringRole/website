@@ -1358,6 +1358,20 @@ section.first {
   background-position: 0 204px;
 }
 
+.supporter-col .supporter-pic {
+  height: 50px;
+  width: 300px;
+  margin: 22px auto;
+  background-position: 0 0px;
+  overflow: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.supporter-col #sr-logo {
+  background-image: url("../img/sr_logo_b.png");
+}
+
 .maintainer-col {
   display: inline-block;
   vertical-align: top;
@@ -1367,14 +1381,18 @@ section.first {
   font-size: 12px;
 }
 .maintainer-col .maintainer-pic {
-  width: 204px;
-  height: 204px;
+  height: 200px;
+  width: 200px;
   margin: 22px auto;
-  background-position: 0 204px;
-}
+  background-position: 0 0px;
+  overflow: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
 
+}
 .maintainer-col #anshaj-pic {
   background-image: url("../img/SKP-page-project-pic-anshaj.png");
+
 }
 .maintainer-col #mayank-pic {
   background-image: url("../img/SKP-page-project-pic-mayank.png");
