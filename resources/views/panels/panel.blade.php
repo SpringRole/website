@@ -45,4 +45,5 @@ if (in_array("delete", $param['rights'])){ ?> @include("panels.delete-skill-pane
 if (in_array("discuss", $param['rights'])){ ?> @include("panels.discuss-skill-panel") <?php }
 if (in_array("share", $param['rights'])){ ?> @include("panels.share-skill-panel") <?php }
 if (in_array("history", $param['rights'])){ ?> @include("panels.skill-history-panel") <?php }
+
 ?>

@@ -293,8 +293,8 @@ var Node = function(nodeData, params) {
     if (tree.busy) return;
     tree.busy = true;
 
-    // Do we first have to contract the selectedNode before expading a new one ?
-    //TODO : rewrite conditions
+    // Do we first have to contract the selectedNode before expanding a new one ?
+    // TODO : rewrite conditions
     var openSibling = that.getSiblingMatch("isInPath", true);
     if (typeof openSibling != "undefined") {
         openSibling.contract({releaseTreeLock: false});
@@ -306,11 +306,13 @@ var Node = function(nodeData, params) {
       ga("send", "event", "nodeOpen", that.name);
       that.select();
       that.expand();
+      that.showDesc()
     }else {
       //Node is open, contracting it
       ga("send", "event", "nodeClose", that.name);
       that.deSelect();
       that.contract();
+      that.hideDesc(); //somehow not working
     }
   });
   this.labelGroup = labelGroup;
