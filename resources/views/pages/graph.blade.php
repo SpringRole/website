@@ -1,6 +1,6 @@
 @extends('layouts.graph')
 @section('content')
-	<div id="preload" style="display: none;">
+<div id="preload" style="display: none;">
 	<img src="img/node/node-sun.svg" id="node-sun" />	
 
 	<img src="img/node/node-normal.svg" id="node-normal" />	
@@ -27,11 +27,13 @@
 	<img src="img/node/glow-nochildren.png" id="glow-nochildren" />
 	<p id="avenir-book">Skill Project</p>
 </div>
+
 <header id="header">
 	<div id="header-container">
 		@include('inc.header')
 	</div>
 </header>
+
 <div id="backdrop"></div>
 <div id="kinetic"></div>
 <div id="panel"></div>
@@ -44,7 +46,7 @@
         <form id="search-form" method="GET" action="/api/skillSearch/">
 		<div id="autocomplete-container">
 			<div id="search-results"></div>
-			<input type="search" name="q" id="kw-input" value="" autocomplete="off" placeholder="SEARCH A SKILL (2195)" />
+			<input type="search" name="q" id="kw-input" value="" autocomplete="off" placeholder="SEARCH FOR A SKILL" />
 		</div>
 		</form>
 

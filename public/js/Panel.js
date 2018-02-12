@@ -128,7 +128,6 @@ var Panel = function(node, initParams) {
                             direction: "right",
                         }, function(){
                             that.panelLoadEvents();
-                            
                             that.setOrUpdateScrollbar();
 
                             ga("send", "event", "panelLoad", panelToLoad);
@@ -425,6 +424,39 @@ var Panel = function(node, initParams) {
                 width: $("#panel").width() 
             });
         if (subPanelId != "first-panel") $(subPanel).hide();
+    }
+}
+
+var descPanel = function (node, initParams) {
+    this.initParams = initParams;
+
+    var that = this;
+
+    $("#panel").height($("#kinetic").height() - $("#footer").height() - 15);
+
+    $.ajax({
+        url: baseUrl + "panel/descPanel/" + node.id + "/"
+    }).done(function(content) {
+        $("#panel").empty().append(content);
+
+        camera.panelOffset = $("#panel").outerWidth();
+
+        $("#panel").show("slide", {
+            direction: "right",
+            complete: function () {
+            }
+        });
+    });
+
+    this.close = function() {
+        that.closePanelModal();
+        $("#panel").hide("slide", {
+            direction: "right",
+            complete: function() {
+                that.$activeSubpanel.hide();
+                camera.panelOffset = 0;
+            }
+        });
     }
 }
 
