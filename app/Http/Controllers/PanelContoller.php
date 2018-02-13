@@ -59,6 +59,18 @@ class PanelContoller extends Controller
 
     }
 
+    public function getPanelDesc($uuid,Request $request){
+
+        $params = array();
+
+        //retrieve the selected skill
+        $skillManager = new SkillManager();
+        $skill = $skillManager->findByUuid($uuid);
+        $params['skill'] = $skill;
+
+        return view('panels.skill-desc-panel', ['param'=>$params]);
+    }
+
     /**
      * Retrieves and send the discussion about a skill
      */
@@ -89,5 +101,4 @@ class PanelContoller extends Controller
 //        $view->send();
         return view('panels.skill-translations', ['param'=>$params]);
     }
-
 }
