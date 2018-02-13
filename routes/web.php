@@ -122,6 +122,10 @@ Route::get('/panel/getPanel/{uuid}', [
     'uses' => 'PanelContoller@getPanelAction'
 ]);
 
+Route::get('/panel/descPanel/{uuid}', [
+    'uses' => 'PanelContoller@getPanelDesc'
+]);
+
 Route::get('/api/getNodeChildren/{uuid}', [
 //    'as'=>'pages.edit_profile',
     'uses' => 'ApiController@getNodeChildrenAction'

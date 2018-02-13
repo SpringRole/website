@@ -1,3 +1,22 @@
+//Show description on a panel
+Node.prototype.showDesc = function () {
+    this.panel = new descPanel(this, {
+        onComplete: function () {
+        }
+    });
+}
+
+//Hide description on close
+Node.prototype.hideDesc = function() {
+    if (this.panel) {
+        this.panel.close({
+            onComplete: function() {
+                delete this.panel;
+            }
+        })
+    }
+}
+
 //Query the API for the children and show them
 Node.prototype.expand = function(params) {
   var that = this;
