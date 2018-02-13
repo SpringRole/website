@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\User;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
 use Mandrill;
 use DrewM\MailChimp\MailChimp;
@@ -128,7 +129,6 @@ class Mailer
         }
     }
 
-
     public function sendAdminApplicationConfirmation(array $params){
         $template_name = 'Skill-Project-ApplyConformation';
         $template_content = array(
@@ -161,15 +161,23 @@ class Mailer
 
     public function sendPasswordRecovery(User $user){
 
-        $recoveryUrl = Router::url("forgotPassword2", array("email" => $user->getEmail(), "token" => $user->getToken()), true);
-        $content = $this->getContent('password_recovery.php', array("recoveryUrl" => $recoveryUrl));
-        $this->outputToFile($content);
-
+        $recoveryUrl = Route('forgot-password-2',["email" => $user->getEmail(), "token" => $user->getToken()]);
+        $template_name = 'password-recovery';
+        $template_content = array(
+            array(
+                'name' => 'example name',
+                'content' => 'example content'
+            )
+        );
         try {
             $mandrill = new Mandrill(env('MANDRILL_KEY'));
             $config = array(
-                'html' => $content,
                 'subject' => _('Forgot your password on Skill Project?'),
+                'global_merge_vars' => array(
+                    array(
+                        'name' => 'recoveryUrl',
+                        'content' => $recoveryUrl
+                    )),
                 'to' => array(
                     array(
                         'email' => $user->getEmail(),
@@ -179,10 +187,9 @@ class Mailer
                 )
             );
             $message = array_merge($this->defaultConfig, $config);
-            $async = false;
-            $result = $mandrill->messages->send($message, $async);
-            return $result;
+            $result = $mandrill->messages->sendTemplate($template_name, $template_content, $message);
 
+            return $result;
         }
         catch(\Mandrill_Error $e) {
             $this->handleError($e);
@@ -282,7 +289,6 @@ class Mailer
                     )),
                 'to' => $this->admins
             );
-
             $message = array_merge($this->defaultConfig, $config);
             $this->addToMailchimp($params['email']);
             $response = $mandrill->messages->sendTemplate($template_name, $template_content, $message);

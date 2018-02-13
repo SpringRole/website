@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     $("#login").click(function() {
         var user_data = $(".form_details").serializeArray();
-        console.log(user_data);
         $.ajax({
             type: "POST",
             url: "/login",
@@ -52,9 +51,6 @@ $(document).ready(function() {
                 }
                 for (var key in erro) {
                     if (erro.hasOwnProperty(key)) {
-                        console.log(key);
-                        console.log('ha');
-                        console.log(erro[key]);
                         if(key === "password_bis" || key === "password")
                         {
                             $("#password-error").html(erro[key]);
