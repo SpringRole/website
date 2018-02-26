@@ -66,7 +66,9 @@ class PanelContoller extends Controller
         //retrieve the selected skill
         $skillManager = new SkillManager();
         $skill = $skillManager->findByUuid($uuid);
+        $relatedSkills = $skillManager->findRelatedByUuid($uuid);
         $params['skill'] = $skill;
+        $params['relatedSkills'] = $relatedSkills;
 
         return view('panels.skill-desc-panel', ['param'=>$params]);
     }

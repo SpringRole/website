@@ -190,6 +190,22 @@ class SkillManager
         return false;
     }
 
+    public function findRelatedByUuid($uuid){
+        $cyp = "MATCH (n:Skill)-[r:RELATED_TO]-(m:Skill) WHERE n.uuid = {uuid} RETURN m ORDER BY r.weight DESC LIMIT 5";
+        $query = new Query($this->client, $cyp, array("uuid"=> $uuid));
+        $resultSet = $query->getResultSet();
+        $skillList = array();
+
+        foreach ($resultSet as $row){
+            $skill = new Skill();
+            $skill->setNode($row['skill']);
+            $skill->hydrateFromNode();
+            $skillList[] = $skill;
+        }
+
+        return $skillList;
+    }
+
     /**
      * Return the Skill object of a deleted skill based on his uuid, false on failure
      * @param string $id

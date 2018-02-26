@@ -56,7 +56,7 @@
                     page.replace(' ', '_');
                 }
                 return page;
-            },            
+            },
             
             /******************************
             Append HTML
