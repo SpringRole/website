@@ -12,3 +12,4 @@ yarn-error.log
 .env
 .env orig
 composer.phar
+.env host
