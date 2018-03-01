@@ -4,7 +4,7 @@
     <hr>
     <h4>Description:</h4>
     <br><br>
-    <div id="node-description"></div>
+    <div style="width: 300px; height: 200px; overflow: auto; padding: 5px; text-align: left" id="node-description"></div>
 
     <script src="js/jquery.wikiblurb.js" type="text/javascript"></script>
 
