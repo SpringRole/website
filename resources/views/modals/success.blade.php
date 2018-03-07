@@ -2,7 +2,7 @@
     <header id="modal-header">
         <img id="modal-logo" src="/img/logo-header.png" alt="Skill Project" />
         <div class="modal-success">
-            <?php echo "Hi!" ?>
+            <?php echo "Completed Successfully" ?>
         </div>
     </header>
 </div>

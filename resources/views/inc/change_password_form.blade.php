@@ -4,7 +4,7 @@
         <h2>Sign In</h2>
     </header>
     <div id="modal-content">
-        <form method= "post" action="{{route('pages.change_password',Auth::user()->id)}}" class="form_details">
+        <form method= "post" action="{{route('pages.change_password',Session::get('user')['uuid'])}}" class="form_details">
             {{csrf_field()}}
             <div>
                 <label for="password"><?= _("NEW PASSWORD") ?></label>
@@ -12,7 +12,7 @@
             </div>
             <div>
                 <label for="password_confirmation"><?= _("NEW PASSWORD AGAIN") ?></label>
-                <input type="password" name="password_confirmation" id="password_confirmation"  required />
+                <input type="password" name="password_bis" id="password_bis"  required />
             </div>
             <div class="submit-container">
                 <input type="submit" value="<?= _("UPDATE") ?>" />

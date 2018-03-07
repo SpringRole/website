@@ -281,20 +281,23 @@
 
                         $userManager = new UserManager();
                         $userManager->update($user);
-
-                        $params["message"] = _("Password updated!");
-                        $view = new View("success.php", $params);
-                        $view->setLayout("../View/layouts/modal.php");
-                        $view->send(true);
+                        // TODO: Show success modal instead of profile page
+//                        return view('modals.success');
+                        return \redirect('/');
+//                        $params["message"] = _("Password updated!");
+//                        $view = new View("success.php", $params);
+//                        $view->setLayout("../View/layouts/modal.php");
+//                        $view->send(true);
                     }
                 }
 
                 $params['errors'] = $validator->getErrors();
             }
-
-            $view = new View("change_password.php", $params);
-            $view->setLayout("../View/layouts/modal.php");
-            $view->send(true);
+            return view('modals.change_password',$params);
+//            return \view('pages.profile',['params'=> $params]);
+//            $view = new View("change_password.php", $params);
+//            $view->setLayout("../View/layouts/modal.php");
+//            $view->send(true);
         }
 
 
