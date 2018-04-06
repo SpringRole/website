@@ -58,7 +58,7 @@ class StatManager extends BaseModel
      */
     public function getLatestChanges($limit = 40, $skip = 0)
     {
-        $languageCodes = new \Model\LanguageCode();
+//        $languageCodes = new \Model\LanguageCode();
 
         $cyp = "MATCH (s)<-[r:CREATED|MODIFIED|TRANSLATED|AUTO_TRANSLATED|DELETED|MOVED]-(u:User)
                     WHERE s:Skill OR s:DeletedSkill
@@ -106,11 +106,11 @@ class StatManager extends BaseModel
                     case "CREATED":
                         $act['actionDetails'] = _("Created");
                         break;
-                    case "AUTO_TRANSLATED":
-                        $translatedInto = $languageCodes->getNames($act['relProps']['to']);
-
-                        $act['actionDetails'] = sprintf(_("Automatically translated into %s: \"%s\""), $translatedInto["name"], $act['relProps']['name']);
-                        break;
+//                    case "AUTO_TRANSLATED":
+//                        $translatedInto = $languageCodes->getNames($act['relProps']['to']);
+//
+//                        $act['actionDetails'] = sprintf(_("Automatically translated into %s: \"%s\""), $translatedInto["name"], $act['relProps']['name']);
+//                        break;
                     case "MOVED":
                         $fromParent = $skillManager->findByUuid($act['relProps']['fromParent']);
                         if (!$fromParent) $fromParentDeleted = $skillManager->findDeletedByUuid($act['relProps']['fromParent']);
@@ -129,11 +129,11 @@ class StatManager extends BaseModel
                             $act['actionDetails'] = sprintf(_("Renamed to \"%s\""), $act['skillName']);
                         }
                         break;
-                    case "TRANSLATED":
-                        $translatedInto = $languageCodes->getNames($act['relProps']['to']);
+//                    case "TRANSLATED":
+//                        $translatedInto = $languageCodes->getNames($act['relProps']['to']);
 
-                        $act['actionDetails'] = sprintf(_("Translated into %s: \"%s\""), $translatedInto["name"], $act['relProps']['name']);
-                        break;
+//                        $act['actionDetails'] = sprintf(_("Translated into %s: \"%s\""), $translatedInto["name"], $act['relProps']['name']);
+//                        break;
                     case "DELETED":
                         $act['actionDetails'] = _("Deleted");
                         break;
@@ -159,6 +159,7 @@ class StatManager extends BaseModel
      */
     public function getMeanNumberOfSkillChildren()
     {
+        #TODO
         die("doesnt work");
         $cyp = "MATCH (s:Skill)-[r:HAS]->(c:Skill)
                         RETURN count(r) as meanNumber";
@@ -228,7 +229,7 @@ class StatManager extends BaseModel
                         WHERE child_num = {max_child}
                         RETURN s
                         ORDER BY s.created ASC";
-        $query = new Query($this->client, $cyp, array("max_child" => \Config\Config::CAP_MAX_CHILD));
+        $query = new Query($this->client, $cyp, array("max_child" => env('CAP_MAX_CHILD')));
         $resultSet = $query->getResultSet();
         if ($resultSet->count() > 0){
             $data = array();
