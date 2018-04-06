@@ -58,7 +58,7 @@ class GraphController extends Controller
         return $userClass;
     }
 
-    public function goToAction($slug){
+    public function goToAction($slug, Request $request){
         $skillManager = new SkillManager();
 
         $rootNode = $skillManager->findRootNode();
@@ -85,9 +85,9 @@ class GraphController extends Controller
                 "rootNode"  => $rootNode,
                 "title"     => $skill->getName(),
                 "action"    => "goto",
-                "jsonAutoLoad"  => $json->getJson($path, false),
+                "jsonAutoLoad"  => $json->getJson(false),
                 "slug"      => $slug,
-                "userClass" => $this->getUserClass()
+                "userClass" => $this->getUserClass($request)
         );
         return view('layouts.graph',['data'=>$data]);
 //        $view->setLayout("../View/layouts/graph.php");

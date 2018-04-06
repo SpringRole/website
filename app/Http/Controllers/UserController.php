@@ -215,22 +215,19 @@
                 }
                 else {
                     $params['message'] = _("Please check your emails!");
-                    $view = new View("success.php", $params);
-                    $view->setLayout("../View/layouts/modal.php");
-                    $view->send(true);
+                    return \redirect('/login')->with('email_sent','Please Check your emails!');
+//                    return view('modals.success',["params"=>$params]);
+//                    $view->setLayout("../View/layouts/modal.php");
+//                    $view->send(true);
                 }
             }
-
-            $view = new View("forgot_password.php", $params);
-            $view->setLayout("../View/layouts/modal.php");
-            $view->send(true);
+            return view('modals.forgot_password',['params'=> $params]);
         }
 
         /**
          * Validates the token and email, then redirect to profile page with a modal new password form
          */
-        public function forgotPassword2Action($email, $token){
-
+        public function forgotPassword2Action($email, $token, Request $request){
             $userManager = new UserManager();
             $user = $userManager->findByEmail($email);
             if ($user){
@@ -239,7 +236,8 @@
                     //change the token
                     $user->setToken( SH::randomString() );
                     $userManager->update($user);
-                    $this->logUser($user);
+                    $this->logUser($request, $user);
+
                     Router::redirect(Router::url("profileWithPassword", array("username" => $user->getUsername())));
                 }
             }
@@ -283,21 +281,23 @@
 
                         $userManager = new UserManager();
                         $userManager->update($user);
-
-                        $params["message"] = _("Password updated!");
-                        $view = new View("success.php", $params);
-                        $view->setLayout("../View/layouts/modal.php");
-                        $view->send(true);
+                        // TODO: Show success modal instead of profile page
+//                        return view('modals.success');
+                        return \redirect('/');
+//                        $params["message"] = _("Password updated!");
+//                        $view = new View("success.php", $params);
+//                        $view->setLayout("../View/layouts/modal.php");
+//                        $view->send(true);
                     }
                 }
 
                 $params['errors'] = $validator->getErrors();
             }
-
-
-            $view = new View("change_password.php", $params);
-            $view->setLayout("../View/layouts/modal.php");
-            $view->send(true);
+            return view('modals.change_password',$params);
+//            return \view('pages.profile',['params'=> $params]);
+//            $view = new View("change_password.php", $params);
+//            $view->setLayout("../View/layouts/modal.php");
+//            $view->send(true);
         }
 
 

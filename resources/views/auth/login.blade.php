@@ -13,7 +13,7 @@
                 <div>
                     <label for="password"><?php echo _("PASSWORD") ?></label>
                     <input type="password" name="password" id="password" required />
-                    <a class="forgot-passowrd-link" href="" title="<?= _("Forgot your password?"); ?>"><?= _("Forgot your password?"); ?></a>
+                    <a class="forgot-passowrd-link" href="/forgot-password-1" title="<?= _("Forgot your password?"); ?>"><?= _("Forgot your password?"); ?></a>
                 </div>
                 <div class="submit-container">
                     <input type="button" id ='login' value="<?php echo _("SIGN IN") ?>" />

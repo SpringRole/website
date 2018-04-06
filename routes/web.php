@@ -83,10 +83,19 @@ Route::get('/edit', function () {
     return view('pages/editor/editor_dashboard');
 });
 
-Route::match(['get', 'post'],'/change_password/{id}', [
+Route::match(['get', 'post'],'/change_password', [
     'as' => 'pages.change_password',
-    'uses' => 'UsersController@changePassword'
+    'uses' => 'UserController@changePasswordAction'
 ]);
+
+Route::match(['get', 'post'],'/forgot-password-1', [
+    'as' => 'forgot-password-1',
+    'uses' => 'UserController@forgotPassword1Action'
+]);
+
+Route::get('/forgot-password-recovery/{email}/{token}', [
+    'uses' => 'UserController@forgotPassword2Action'
+])->name('forgot-password-2');
 
 //Route::get('/graph', ['uses' => 'GraphController@graphAction']);
 Route::get('/skills', ['uses' => 'GraphController@graphAction'])->name('graph');

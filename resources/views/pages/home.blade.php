@@ -1,4 +1,3 @@
-
 @extends('layouts.default')
 @section('content')
 <div id="home-top-panel">
