@@ -177,6 +177,10 @@ Route::get('/js-translations', [
     'uses' => 'ApiController@getJSTranslationsAction'
 ]);
 
+Route::get('/api/skillSearch', [
+    'as' => 'skillSearch',
+    'uses' => 'ApiController@skillSearchAction'
+]);
 
 /*
  * LARAVEL Specific Routes
