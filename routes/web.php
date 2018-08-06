@@ -182,6 +182,10 @@ Route::get('/api/skillSearch', [
     'uses' => 'ApiController@skillSearchAction'
 ]);
 
+Route::get('/api/getNodePathToRoot/{slug}', [
+    'uses' => 'ApiController@getNodePathToRootAction'
+]);
+
 /*
  * LARAVEL Specific Routes
  */

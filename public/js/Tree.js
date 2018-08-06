@@ -35,6 +35,7 @@ var Tree = function() {
             var children = jsonAutoLoad.data[tree.autoLoadCurrentDepth].children;
             if (tree.autoLoadCurrentDepth == 0) tree.rootNode.select();
             else {
+                // @todo: This is not working for search
                 tree.nodes[jsonAutoLoad.data[tree.autoLoadCurrentDepth].uuid].select();
             }
 
